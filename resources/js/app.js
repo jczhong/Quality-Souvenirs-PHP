@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +27,97 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+// const app = new Vue({
+//     el: '#app',
+// });
+
+$(document).ready(function () {
+    $("#SortSelector").on("change", function () {
+        var url = location.href;
+        var value = url.match(/sort=(.\w*)/);
+        if (value != null) {
+            url = url.replace(value[1], this.value);
+        } else {
+            if (location.search != "") {
+                url = url + "&sort=" + this.value;
+            } else {
+                url = url + "?sort=" + this.value;
+            }
+        }
+        if ($(this).attr("search") != null) {
+            if (url.match(/search=/) == null) {
+                var search = $(this).attr("search");
+                if (location.search != "") {
+                    url = url + "&search=" + search;
+                } else {
+                    url = url + "?search=" + search;
+                }
+            }
+        }
+
+        if ($("#MinPrice").val().length != 0) {
+            if (url.match(/minprice=/) == null) {
+                var minprice = $("#MinPrice").val();
+                if (location.search != "") {
+                    url = url + "&minprice=" + minprice;
+                } else {
+                    url = url + "?minprice=" + minprice;
+                }
+            }
+        }
+        if ($("#MaxPrice").val().length != 0) {
+            if (url.match(/maxprice=/) == null) {
+                var maxprice = $("#MaxPrice").val();
+                if (location.search != "") {
+                    url = url + "&maxprice=" + maxprice;
+                } else {
+                    url = url + "?maxprice=" + maxprice;
+                }
+            }
+        }
+        location.href = url;
+    });
+
+    function setCartCount(count) {
+        $("#CartCount").text(count);
+    }
+
+    function addCount(selector, count) {
+        var currentCount = $(selector).text();
+        if (currentCount == undefined) {
+            currentCount = 0;
+        }
+        currentCount = Number(currentCount);
+        currentCount += Number(count);
+        $(selector).text(currentCount);
+    }
+
+    (function() {
+        $.get("/ShoppingCart/GetCount", function (data, status) {
+            if (status == "success") {
+                setCartCount(data);
+            }
+        });
+    })();
+
+    $('button[id^=AddToCart-]').click(function () {
+        var count = this.value;
+        var id = $(this).attr("id").match(/AddToCart-(.*)/);
+        if (id != null) {
+            id = id[1];
+        }
+
+        $.post("/ShoppingCart/AddPOST",
+            {
+                id: id,
+                count: count
+            },
+            function (data, status) {
+                if (status == "success") {
+                    addCount('#CartCount', count);
+                } else {
+                    alert("Out of stock!");
+                }
+            });
+    });
+})
