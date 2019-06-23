@@ -40,14 +40,14 @@
         </nav>
     </div>
 
-    <div class="container">
+    <div class="container body-content">
         @yield('content')
     </div>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-auto">
-                <p class="mt-4">&copy; Copyright 2019 - Quality Souvenirs</p>
+                <p class="mt-5">&copy; Copyright 2019 - Quality Souvenirs</p>
             </div>
         </div>
     </div>
