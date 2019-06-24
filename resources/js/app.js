@@ -98,6 +98,9 @@ $(document).ready(function () {
                 setCartCount(data);
             }
         });
+
+        var selector_value = $('li.nav-item.sort-selector').attr('value');
+        $('li.nav-item.sort-selector select').val(selector_value);
     })();
 
     $('button[id^=AddToCart-]').click(function () {

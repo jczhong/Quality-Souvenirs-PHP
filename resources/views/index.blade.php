@@ -34,19 +34,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col mt-2">
-            <div class="card-columns">
-                @foreach($categories as $category)
-                    <div class="card text-center">
-                        <a href="#">
-                            <img class="card-img-top img-responsive" src="{{ $category->PathOfImage }}" alt=""/>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-text">{{ $category->Name }}</h5>
-                        </div>
+        @foreach($categories as $category)
+            <div class="col-2 mt-4">
+                <div class="card text-center p-2">
+                    <a href="{{ url('/product/?id='.$category->id) }}">
+                        <img class="card-img-top img-responsive" src="{{ asset($category->PathOfImage) }}" alt=""/>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-text">{{ $category->Name }}</h5>
                     </div>
-                @endforeach
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection
