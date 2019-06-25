@@ -93,7 +93,7 @@ $(document).ready(function () {
     }
 
     (function() {
-        $.get("/ShoppingCart/GetCount", function (data, status) {
+        $.get("/qualitysouvenirs/public/ShoppingCart/GetCount", function (data, status) {
             if (status == "success") {
                 setCartCount(data);
             }
@@ -110,17 +110,19 @@ $(document).ready(function () {
             id = id[1];
         }
 
-        $.post("/ShoppingCart/AddPOST",
-            {
+        $.ajax({
+            url: '/qualitysouvenirs/public/ShoppingCart/AddPOST',
+            type: 'post',
+            data: {
                 id: id,
                 count: count
             },
-            function (data, status) {
-                if (status == "success") {
-                    addCount('#CartCount', count);
-                } else {
-                    alert("Out of stock!");
-                }
-            });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                addCount('#CartCount', count);
+            }
+        });
     });
 })

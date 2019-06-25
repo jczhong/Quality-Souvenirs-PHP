@@ -91,7 +91,7 @@ class Initial extends Migration
 
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Session', 30);
+            $table->uuid('Session');
             $table->timestamps();
         });
 

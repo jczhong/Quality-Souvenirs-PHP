@@ -17,3 +17,9 @@ Route::view('/contact', 'contact');
 
 
 Route::get('/product', 'ProductController@index');
+Route::post('/ShoppingCart/AddPOST', 'ShoppingCartController@AddPOST');
+Route::get('/ShoppingCart/show', 'ShoppingCartController@show');
+Route::get('/ShoppingCart/AddGet', 'ShoppingCartController@AddGet');
+Route::get('/ShoppingCart/Remove', 'ShoppingCartController@Remove');
+Route::get('ShoppingCart/ClearCart', 'ShoppingCartController@ClearCart');
+Route::get('ShoppingCart/GetCount', 'ShoppingCartController@GetCount');

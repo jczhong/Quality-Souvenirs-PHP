@@ -2,12 +2,6 @@
 
 @section('title', 'Product')
 
-@php
-    function get_url() {
-
-    }
-@endphp
-
 @section('content')
     <div class="row mt-2">
         <div class="col">
@@ -97,9 +91,9 @@
                     <h5>{{ $souvenir->Name }}</h5>
                     <div>{{ $souvenir->Price }}</div>
                     <div class="text-center mt-1">
-                        <a class="btn btn-success" id="AddToCart-@item.ID" value="1">
+                        <button class="btn btn-success" id="{{ 'AddToCart-'.$souvenir->id }}" value="1">
                             Add to Cart
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

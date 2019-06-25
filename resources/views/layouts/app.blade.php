@@ -36,6 +36,19 @@
                         <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item mr-sm-2">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                    <li class="nav-item mr-sm-2">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/ShoppingCart/show') }}">
+                            <i class="fas fa-shopping-cart"></i><span id="CartCount">0</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>
