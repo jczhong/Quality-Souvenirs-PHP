@@ -23,3 +23,6 @@ Route::get('/ShoppingCart/AddGet', 'ShoppingCartController@AddGet');
 Route::get('/ShoppingCart/Remove', 'ShoppingCartController@Remove');
 Route::get('ShoppingCart/ClearCart', 'ShoppingCartController@ClearCart');
 Route::get('ShoppingCart/GetCount', 'ShoppingCartController@GetCount');
+
+Auth::routes();
+Route::get('/profile', 'ProfileController@index')->name('profile');

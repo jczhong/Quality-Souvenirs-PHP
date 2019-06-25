@@ -37,12 +37,33 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item mr-sm-2">
-                        <a class="nav-link" href="#">Register</a>
-                    </li>
-                    <li class="nav-item mr-sm-2">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
+                    @guest
+                        <li class="nav-item mr-sm-2">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
+                        <li class="nav-item mr-sm-2">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                    @else
+                        <li class="nav-item mr-sm-2 dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/ShoppingCart/show') }}">
                             <i class="fas fa-shopping-cart"></i><span id="CartCount">0</span>

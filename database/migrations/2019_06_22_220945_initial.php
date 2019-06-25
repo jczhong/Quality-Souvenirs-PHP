@@ -20,9 +20,9 @@ class Initial extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('FullName', 30);
-            $table->string('Address', 100);
-            $table->boolean('Enabled');
+            $table->string('FullName', 30)->nullable();
+            $table->string('Address', 100)->nullable();
+            $table->boolean('Enabled')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
