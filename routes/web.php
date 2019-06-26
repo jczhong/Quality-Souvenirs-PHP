@@ -27,6 +27,7 @@ Route::get('/ShoppingCart/GetCount', 'ShoppingCartController@GetCount');
 
 Auth::routes();
 Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile/store', 'ProfileController@store');
 
 Route::get('/order', 'OrderController@index');
 Route::get('/order/create', 'OrderController@create');

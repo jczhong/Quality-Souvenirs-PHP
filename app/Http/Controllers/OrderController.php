@@ -74,10 +74,10 @@ class OrderController extends Controller
         $session = session('cart');
         if ($session != null) {
             $order=new Order;
-            $order->FirstName=$request->input('firstName');
-            $order->LastName=$request->input('lastName');
-            $order->PhoneNumber=$request->input('phone');
-            $order->Address=$request->input('address');
+            $order->FirstName = $request->input('firstName');
+            $order->LastName = $request->input('lastName');
+            $order->PhoneNumber = $request->input('phone');
+            $order->Address = $request->input('address');
             $order->UserID = Auth::id();
             $order->save();
 

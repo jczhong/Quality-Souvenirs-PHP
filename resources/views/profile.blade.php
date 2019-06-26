@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="email" class="control-label">{{ 'Email' }}</label>
-            <input id="email" name="email" class="form-control" type="text" value="{{ $email }}"/>
+            <input id="email" name="email" class="form-control" type="text" value="{{ $email }}" disabled/>
         </div>
         <div class="form-group">
             <label for="phoneNumber" class="control-label">{{ 'Phone' }}</label>
