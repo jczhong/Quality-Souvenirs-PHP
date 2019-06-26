@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Souvenir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -65,5 +66,15 @@ class ProductController extends Controller
             'souvenirs' => $souvenirs, 'id' => $id, 'byId' => $byId,
             'sort' => $sort, 'search' => $search,
             'minprice' => $minprice, 'maxprice' => $maxprice]);
+    }
+
+    public function detail(Request $request) {
+        $id = $request->input('id');
+        if ($id != null) {
+            $souvenir = Souvenir::find($id);
+            return view('product_detail', ['souvenir' => $souvenir]);
+        }
+
+        return response('', 404);
     }
 }

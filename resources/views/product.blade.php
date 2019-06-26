@@ -83,13 +83,13 @@
         @foreach ($souvenirs as $souvenir)
             <div class="col-2 mb-4">
                 <div>
-                    <a href="#">
+                    <a href="{{ url('/product/detail').'?'.http_build_query(['id' => $souvenir->id]) }}">
                         <img width="150" height="200" src="{{ $souvenir->PathOfImage }}">
                     </a>
                 </div>
                 <div class="text-center mt-1">
                     <h5>{{ $souvenir->Name }}</h5>
-                    <div>{{ $souvenir->Price }}</div>
+                    <div>{{ '$'.$souvenir->Price }}</div>
                     <div class="text-center mt-1">
                         <button class="btn btn-success" id="{{ 'AddToCart-'.$souvenir->id }}" value="1">
                             Add to Cart
