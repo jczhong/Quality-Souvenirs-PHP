@@ -25,6 +25,7 @@ class ShoppingCartController extends Controller
             $session = session('cart');
             info('old session:', [$session]);
 
+            //session()->remove('cart');
             $cart = ShoppingCart::where('Session', $session)->first();
         }
         info('get cart:', [$cart]);

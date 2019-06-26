@@ -1,21 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.profile')
 
-@section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+@section('profile_content')
+    <h2>Profile</h2>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
+    <form action="{{ url('/profile/store') }}" method="post">
+        @csrf
+        <div class="form-group">
+            <label for="fullName">{{ 'FullName' }}</label>
+            <input id="fullName" name="fullName" class="form-control" type="text" value="{{ $fullName }}"/>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="email" class="control-label">{{ 'Email' }}</label>
+            <input id="email" name="email" class="form-control" type="text" value="{{ $email }}"/>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber" class="control-label">{{ 'Phone' }}</label>
+            <input id="phoneNumber" name="phone" type="text" class="form-control" value="{{ $phoneNumber }}"/>
+        </div>
+        <div class="form-group">
+            <label for="address" class="control-label">{{ 'Address' }}</label>
+            <input id="address" name="address" class="form-control" type="text" value="{{ $address }}"/>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-success"/>
+        </div>
+    </form>
 @endsection

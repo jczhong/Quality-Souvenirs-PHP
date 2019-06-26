@@ -21,8 +21,10 @@ class Initial extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('FullName', 30)->nullable();
+            $table->string('PhoneNumber', 15)->nullable();
             $table->string('Address', 100)->nullable();
             $table->boolean('Enabled')->default(true);
+            $table->boolean('isAdmin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -69,11 +71,11 @@ class Initial extends Migration
             $table->string('LastName', 30);
             $table->string('Address', 100);
             $table->string('PhoneNumber', 15);
-            $table->double('SubTotal');
-            $table->double('GST');
-            $table->double('GrandTotal');
-            $table->string('OrderStatus', 10);
-            $table->dateTime('Date');
+            $table->double('SubTotal')->nullable();
+            $table->double('GST')->nullable();
+            $table->double('GrandTotal')->nullable();
+            $table->string('OrderStatus', 10)->nullable();
+            $table->dateTime('Date')->nullable();
             $table->unsignedInteger('UserID');
             $table->foreign('UserID')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

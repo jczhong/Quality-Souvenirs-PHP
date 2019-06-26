@@ -91,7 +91,7 @@
                         </td>
                         <td>
                             <a class="btn btn-danger" href="{{ url('/ShoppingCart/ClearCart') }}">Clear Cart</a>
-                            <a class="btn btn-success" href="#">Checkout</a>
+                            <a class="btn btn-success" href="{{ url('/order/create') }}">Checkout</a>
                         </td>
                     </tr>
                 @endif

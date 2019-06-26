@@ -22,8 +22,13 @@ Route::post('/ShoppingCart/AddPOST', 'ShoppingCartController@AddPOST');
 Route::get('/ShoppingCart/show', 'ShoppingCartController@show');
 Route::get('/ShoppingCart/AddGet', 'ShoppingCartController@AddGet');
 Route::get('/ShoppingCart/Remove', 'ShoppingCartController@Remove');
-Route::get('ShoppingCart/ClearCart', 'ShoppingCartController@ClearCart');
-Route::get('ShoppingCart/GetCount', 'ShoppingCartController@GetCount');
+Route::get('/ShoppingCart/ClearCart', 'ShoppingCartController@ClearCart');
+Route::get('/ShoppingCart/GetCount', 'ShoppingCartController@GetCount');
 
 Auth::routes();
 Route::get('/profile', 'ProfileController@index')->name('profile');
+
+Route::get('/order', 'OrderController@index');
+Route::get('/order/create', 'OrderController@create');
+Route::post('/order/store', 'OrderController@store');
+
