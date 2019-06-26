@@ -50,7 +50,7 @@
                 </td>
                 @if ($isAdmin == true)
                     <td>
-                        <a href="{{ url('/order/edit') }}">Edit</a>
+                        <a href="{{ url('/order/edit').'?'.http_build_query(['id' => $order->id]) }}">Edit</a>
                     </td>
                 @endif
             </tr>

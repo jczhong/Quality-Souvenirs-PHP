@@ -32,4 +32,6 @@ Route::post('/profile/store', 'ProfileController@store');
 Route::get('/order', 'OrderController@index');
 Route::get('/order/create', 'OrderController@create');
 Route::post('/order/store', 'OrderController@store');
+Route::get('/order/edit', 'OrderController@edit');
+Route::post('/order/update/{id}', 'OrderController@update');
 

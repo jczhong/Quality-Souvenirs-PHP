@@ -132,9 +132,13 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Request $request)
     {
-        //
+        $user = Auth::user();
+        $id = $request->input('id');
+        $order = Order::find($id);
+
+        return view('profile_orders_edit', ['isAdmin' => $user->isAdmin, 'order' => $order]);
     }
 
     /**
@@ -144,9 +148,19 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        info('===>');
+        $request->validate([
+            'status' => 'required',
+        ]);
+        info('===>', [$request->input('status')]);
+
+        $order = Order::find($id);
+        $order->OrderStatus = $request->input('status');
+        $order->save();
+
+        return redirect('/order');
     }
 
     /**

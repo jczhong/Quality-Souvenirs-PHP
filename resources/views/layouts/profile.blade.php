@@ -11,7 +11,7 @@
             </li>
             @if ($isAdmin == true)
             <li class="nav-item">
-                <a class="nav-link" href="#">Customers</a>
+                <a class="nav-link" href="{{ url('/customer') }}">Customers</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Souvenirs</a>
