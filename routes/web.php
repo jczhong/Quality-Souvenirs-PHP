@@ -35,3 +35,7 @@ Route::post('/order/store', 'OrderController@store');
 Route::get('/order/edit', 'OrderController@edit');
 Route::post('/order/update/{id}', 'OrderController@update');
 
+
+Route::get('/customer', 'CustomerController@index');
+Route::get('/customer/edit', 'CustomerController@edit');
+Route::post('/customer/update/{id}', 'CustomerController@update');

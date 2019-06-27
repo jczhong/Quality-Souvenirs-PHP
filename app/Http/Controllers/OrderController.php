@@ -150,11 +150,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        info('===>');
         $request->validate([
             'status' => 'required',
         ]);
-        info('===>', [$request->input('status')]);
 
         $order = Order::find($id);
         $order->OrderStatus = $request->input('status');
