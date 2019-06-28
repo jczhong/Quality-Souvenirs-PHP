@@ -32,15 +32,19 @@ class ShoppingCartController extends Controller
         return $cart;
     }
 
-    public function AddPOST(Request $request)
+    public function add(Request $request)
     {
         $id = $request->input('id');
         $count = $request->input('count');
 
         if ($id != null && $count != null) {
             $cart = $this->getShoppingCart();
-            if ($cart->AddToCart($id, $count) == true) {
+            if ($cart->addToCart($id, $count) == true) {
+                if ($request->isMethod('post')) {
                     return response('ok', 200);
+                } else {
+                    return redirect('cart/show');
+                }
             }
         }
         return response('', 404);
@@ -66,42 +70,28 @@ class ShoppingCartController extends Controller
             ['cartItems' => $cartItems, 'subTotal' => $subTotal, 'gst' => $gst, 'grandTotal' => $grandTotal]);
     }
 
-    public function AddGET(Request $request) {
+    public function remove(Request $request) {
         $id = $request->input('id');
         $count = $request->input('count');
 
         if ($id != null && $count != null) {
             $cart = $this->getShoppingCart();
-            if ($cart->AddToCart($id, $count) == true) {
-                return redirect('ShoppingCart/show');
-            }
+            $cart->removeFromCart($id, $count);
+            return redirect('cart/show');
         }
         return response('', 404);
     }
 
-    public function Remove(Request $request) {
-        $id = $request->input('id');
-        $count = $request->input('count');
-
-        if ($id != null && $count != null) {
-            $cart = $this->getShoppingCart();
-            $cart->RemoveFromCart($id, $count);
-            return redirect('ShoppingCart/show');
-        }
-        return response('', 404);
+    public function clean() {
+        $cart = $this->getShoppingCart();
+        $cart->cleanCart();
+        return redirect('cart/show');
     }
 
-    public function ClearCart() {
+    public function count() {
         $cart = $this->getShoppingCart();
-        $cart->ClearCart();
-        return redirect('ShoppingCart/show');
-    }
-
-    public function GetCount() {
-        $cart = $this->getShoppingCart();
-        $count = $cart->GetCount();
+        $count = $cart->getCount();
 
         return response($count, 200);
     }
-
 }

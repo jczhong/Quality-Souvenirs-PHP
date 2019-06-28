@@ -13,7 +13,7 @@ class ShoppingCart extends Model
         return $this->hasMany('App\CartItem', 'ShoppingCartID');
     }
 
-    public function AddToCart($id, $count) {
+    public function addToCart($id, $count) {
         $souvenir = Souvenir::find($id);
         if ($souvenir != null) {
             $cartItem = CartItem::where('ShoppingCartID', $this->id)
@@ -37,7 +37,7 @@ class ShoppingCart extends Model
         return false;
     }
 
-    public function RemoveFromCart($id, $count) {
+    public function removeFromCart($id, $count) {
         $souvenir = Souvenir::find($id);
         if ($souvenir != null) {
             $cartItem = CartItem::where('ShoppingCartID', $this->id)
@@ -54,7 +54,7 @@ class ShoppingCart extends Model
         }
     }
 
-    public function ClearCart() {
+    public function cleanCart() {
         $cartItems = CartItem::where('ShoppingCartID', $this->id)->get();
         foreach ($cartItems as $cartItem) {
             $cartItem->delete();
@@ -66,7 +66,7 @@ class ShoppingCart extends Model
         return $cartItems;
     }
 
-    public function GetCount() {
+    public function getCount() {
         $count = 0;
         $cartItems = CartItem::where('ShoppingCartID', $this->id)->get();
         foreach ($cartItems as $cartItem) {

@@ -65,7 +65,7 @@
                         </li>
                     @endguest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/ShoppingCart/show') }}">
+                        <a class="nav-link" href="{{ url('/cart/show') }}">
                             <i class="fas fa-shopping-cart"></i><span id="CartCount">0</span>
                         </a>
                     </li>

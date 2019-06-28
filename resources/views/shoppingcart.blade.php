@@ -47,9 +47,9 @@
                             {{ $cartItem->souvenir->Price }}
                         </td>
                         <td>
-                            <a class="btn btn-success" href="{{ url('/ShoppingCart/AddGet'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => 1])) }}">+</a>
-                            <a class="btn btn-success" href="{{ url('/ShoppingCart/Remove'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => 1])) }}">-</a>
-                            <a class="btn btn-danger" href="{{ url('/ShoppingCart/Remove'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => $cartItem->Count])) }}">Delete</a>
+                            <a class="btn btn-success" href="{{ url('/cart/add'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => 1])) }}">+</a>
+                            <a class="btn btn-success" href="{{ url('/cart/remove'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => 1])) }}">-</a>
+                            <a class="btn btn-danger" href="{{ url('/cart/remove'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => $cartItem->Count])) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach
@@ -90,7 +90,7 @@
                             {{ $grandTotal }}
                         </td>
                         <td>
-                            <a class="btn btn-danger" href="{{ url('/ShoppingCart/ClearCart') }}">Clear Cart</a>
+                            <a class="btn btn-danger" href="{{ url('/cart/clean') }}">Clear Cart</a>
                             <a class="btn btn-success" href="{{ url('/order/create') }}">Checkout</a>
                         </td>
                     </tr>

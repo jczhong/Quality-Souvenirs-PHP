@@ -24,12 +24,12 @@ Route::get('/product/manage/edit', 'ProductController@edit');
 Route::post('/product/manage/update/{id}', 'ProductController@update');
 
 
-Route::post('/ShoppingCart/AddPOST', 'ShoppingCartController@AddPOST');
-Route::get('/ShoppingCart/show', 'ShoppingCartController@show');
-Route::get('/ShoppingCart/AddGet', 'ShoppingCartController@AddGet');
-Route::get('/ShoppingCart/Remove', 'ShoppingCartController@Remove');
-Route::get('/ShoppingCart/ClearCart', 'ShoppingCartController@ClearCart');
-Route::get('/ShoppingCart/GetCount', 'ShoppingCartController@GetCount');
+Route::post('/cart/add', 'ShoppingCartController@add');
+Route::get('/cart/show', 'ShoppingCartController@show');
+Route::get('/cart/add', 'ShoppingCartController@add');
+Route::get('/cart/remove', 'ShoppingCartController@remove');
+Route::get('/cart/clean', 'ShoppingCartController@clean');
+Route::get('/cart/count', 'ShoppingCartController@count');
 
 Auth::routes();
 Route::get('/profile', 'ProfileController@index');
