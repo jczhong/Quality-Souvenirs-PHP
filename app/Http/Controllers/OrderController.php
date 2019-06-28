@@ -6,7 +6,6 @@ use App\Order;
 use App\OrderDetail;
 use App\ShoppingCart;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +26,7 @@ class OrderController extends Controller
             $orders = Order::all();
             $isAdmin = true;
         } else {
-            $orders = Order::where('UserID', $user->id)->get();
+            $orders = Order::where('user_id', $user->id)->get();
         }
         return view('order.index', ['orders' => $orders, 'isAdmin' => $isAdmin]);
     }
@@ -39,11 +38,11 @@ class OrderController extends Controller
         $phoneNumber = null;
 
         if ($user != null) {
-            $address = $user->Address;
-            $phoneNumber = $user->PhoneNumber;
+            $address = $user->address;
+            $phone = $user->phone;
         }
 
-        return view('order.create', ['address' => $address, 'phoneNumber' => $phoneNumber]);
+        return view('order.create', ['address' => $address, 'phone' => $phone]);
     }
 
     public function store(Request $request)
@@ -58,14 +57,14 @@ class OrderController extends Controller
         $session = session('cart');
         if ($session != null) {
             $order=new Order;
-            $order->FirstName = $request->input('firstName');
-            $order->LastName = $request->input('lastName');
-            $order->PhoneNumber = $request->input('phone');
-            $order->Address = $request->input('address');
-            $order->UserID = Auth::id();
+            $order->first_name = $request->input('firstName');
+            $order->last_name = $request->input('lastName');
+            $order->phone = $request->input('phone');
+            $order->address = $request->input('address');
+            $order->user_id = Auth::id();
             $order->save();
 
-            $cart = ShoppingCart::where('Session', $session)->first();
+            $cart = ShoppingCart::where('session', $session)->first();
             $cartItems = $cart->getCartItems();
 
             $subTotal = 0.0;
@@ -74,29 +73,30 @@ class OrderController extends Controller
             $GST = 0.15;
 
             foreach ($cartItems as $cartItem) {
-                $subTotal += $cartItem->souvenir->Price * $cartItem->Count;
+                $subTotal += $cartItem->product->price * $cartItem->count;
 
                 $orderDetail = new OrderDetail;
-                $orderDetail->Quantity = $cartItem->Count;
-                $orderDetail->SouvenirID = $cartItem->SouvenirID;
-                $orderDetail->OrderID = $order->id;
+                $orderDetail->quantity = $cartItem->count;
+                $orderDetail->product_id = $cartItem->product_id;
+                $orderDetail->order_id = $order->id;
                 $orderDetail->save();
             }
 
             $gst += $subTotal * $GST;
             $grandTotal += $subTotal + $gst;
 
-            $order->SubTotal = $subTotal;
-            $order->GST = $gst;
-            $order->GrandTotal = $grandTotal;
-            $order->OrderStatus = "waiting";
-            $order->Date = Carbon::now();
+            $order->sub_total = $subTotal;
+            $order->gst = $gst;
+            $order->grand_total = $grandTotal;
+            $order->status = "waiting";
             $order->save();
+
+            //FIXME need to remove cart items
 
             return redirect('/order');
         }
 
-        return response('session expore', 404);
+        return response('session expire', 404);
     }
 
     public function show(Order $order)
@@ -120,7 +120,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::find($id);
-        $order->OrderStatus = $request->input('status');
+        $order->status = $request->input('status');
         $order->save();
 
         return redirect('/order');

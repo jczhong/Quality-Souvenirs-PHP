@@ -5,16 +5,16 @@
 @section('content')
     <div class="row mt-4">
         <div class="col-4">
-            <img width="300" height="400" src="{{ asset($souvenir->PathOfImage) }}" />
+            <img width="300" height="400" src="{{ asset($product->path_of_name) }}" />
         </div>
         <div class="col">
             <div>
-                <h3 class="pb-2">{{ $souvenir->Name }}</h3>
-                <h4 class="pt-2 pb-2 font-weight-bold">{{ '$'.$souvenir->Price }}</h4>
-                <p class="pt-2">{{ $souvenir->Description }}</p>
+                <h3 class="pb-2">{{ $product->name }}</h3>
+                <h4 class="pt-2 pb-2 font-weight-bold">{{ '$'.$product->price }}</h4>
+                <p class="pt-2">{{ $product->description }}</p>
             </div>
             <div>
-                <button id="{{ 'AddToCart-'.$souvenir->id }}" value="1" type="button" class="btn btn-success">Add to Cart</button>
+                <button id="{{ 'AddToCart-'.$product->id }}" value="1" type="button" class="btn btn-success">Add to Cart</button>
             </div>
         </div>
     </div>

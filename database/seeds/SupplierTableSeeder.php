@@ -12,9 +12,9 @@ class SupplierTableSeeder extends Seeder
      */
     public function run()
     {
-        $supplier = new App\Supplier(['Name' => 'Countdown Ltd', 'WorkPhoneNumber' => '1234567', 'Email' => 'business@countdown.com', 'Address' => '179 Carrington Road']);
+        $supplier = new App\Supplier(['name' => 'Countdown Ltd', 'phone' => '1234567', 'email' => 'business@countdown.com', 'address' => '179 Carrington Road']);
         $supplier->save();
-        $supplier = new App\Supplier(['Name' => 'New World Ltd', 'WorkPhoneNumber' => '1234567', 'Email' => 'business@newworld.com', 'Address' => '179 Carrington Road']);
+        $supplier = new App\Supplier(['name' => 'New World Ltd', 'phone' => '1234567', 'email' => 'business@newworld.com', 'address' => '179 Carrington Road']);
         $supplier->save();
     }
 }

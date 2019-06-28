@@ -1,7 +1,7 @@
 @extends('layouts.management')
 
 @section('management_content')
-    <h2>Orders</h2>
+    <h2>Order</h2>
     <form action="{{ url('/order/update/'.$order->id) }}" method="post">
         @csrf
         <div class="form-group">

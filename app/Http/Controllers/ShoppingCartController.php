@@ -26,9 +26,10 @@ class ShoppingCartController extends Controller
             info('old session:', [$session]);
 
             //session()->remove('cart');
-            $cart = ShoppingCart::where('Session', $session)->first();
+            $cart = ShoppingCart::where('session', $session)->first();
         }
         info('get cart:', [$cart]);
+
         return $cart;
     }
 
@@ -60,7 +61,7 @@ class ShoppingCartController extends Controller
         $GST = 0.15;
 
         foreach ($cartItems as $cartItem) {
-            $subTotal += $cartItem->souvenir->Price * $cartItem->Count;
+            $subTotal += $cartItem->product->price * $cartItem->count;
         }
 
         $gst += $subTotal * $GST;

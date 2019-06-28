@@ -11,7 +11,7 @@
                 <thead>
                 <tr>
                     <th>
-                        Souvenir ID
+                        Product ID
                     </th>
                     <th>
                         Name
@@ -32,24 +32,24 @@
                 @foreach ($cartItems as $cartItem)
                     <tr>
                         <td>
-                            {{ $cartItem->souvenir->id }}
+                            {{ $cartItem->product->id }}
                         </td>
                         <td>
-                            {{ $cartItem->souvenir->Name }}
+                            {{ $cartItem->product->name }}
                         </td>
                         <td>
-                            {{ $cartItem->souvenir->category->Name }}
+                            {{ $cartItem->product->category->name }}
                         </td>
                         <td>
-                            {{ $cartItem->Count }}
+                            {{ $cartItem->count }}
                         </td>
                         <td>
-                            {{ $cartItem->souvenir->Price }}
+                            {{ $cartItem->product->price }}
                         </td>
                         <td>
-                            <a class="btn btn-success" href="{{ url('/cart/add'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => 1])) }}">+</a>
-                            <a class="btn btn-success" href="{{ url('/cart/remove'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => 1])) }}">-</a>
-                            <a class="btn btn-danger" href="{{ url('/cart/remove'.'?'.http_build_query(['id' => $cartItem->souvenir->id, 'count' => $cartItem->Count])) }}">Delete</a>
+                            <a class="btn btn-success" href="{{ url('/cart/add'.'?'.http_build_query(['id' => $cartItem->product->id, 'count' => 1])) }}">+</a>
+                            <a class="btn btn-success" href="{{ url('/cart/remove'.'?'.http_build_query(['id' => $cartItem->product->id, 'count' => 1])) }}">-</a>
+                            <a class="btn btn-danger" href="{{ url('/cart/remove'.'?'.http_build_query(['id' => $cartItem->product->id, 'count' => $cartItem->count])) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach

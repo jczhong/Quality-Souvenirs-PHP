@@ -80,18 +80,18 @@
     </div>
 
     <div class="row mt-2">
-        @foreach ($souvenirs as $souvenir)
+        @foreach ($products as $product)
             <div class="col-2 mb-4">
                 <div>
-                    <a href="{{ url('/product/detail').'/'.$souvenir->id }}">
-                        <img width="150" height="200" src="{{ $souvenir->PathOfImage }}">
+                    <a href="{{ url('/product/detail').'/'.$product->id }}">
+                        <img width="150" height="200" src="{{ $product->path_of_image }}">
                     </a>
                 </div>
                 <div class="text-center mt-1">
-                    <h5>{{ $souvenir->Name }}</h5>
-                    <div>{{ '$'.$souvenir->Price }}</div>
+                    <h5>{{ $product->name }}</h5>
+                    <div>{{ '$'.$product->price }}</div>
                     <div class="text-center mt-1">
-                        <button class="btn btn-success" id="{{ 'AddToCart-'.$souvenir->id }}" value="1">
+                        <button class="btn btn-success" id="{{ 'AddToCart-'.$product->id }}" value="1">
                             Add to Cart
                         </button>
                     </div>

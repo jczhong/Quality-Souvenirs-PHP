@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber" class="control-label">{{ 'Phone' }}</label>
-                    <input id="phoneNumber" name="phone" type="text" class="form-control" value="{{ $phoneNumber }}"/>
+                    <input id="phoneNumber" name="phone" type="text" class="form-control" value="{{ $phone }}"/>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Submit" class="btn btn-success"/>

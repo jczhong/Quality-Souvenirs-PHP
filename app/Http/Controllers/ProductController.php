@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Souvenir;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +16,12 @@ class ProductController extends Controller
     }
 
     public function list(Request $request) {
-        $souvenirs = DB::table("souvenirs")
+        $products = DB::table("products")
             ->select(DB::raw('*'));
 
         $id = Input::get('id');
         if ($id != null) {
-            $souvenirs = $souvenirs->where('CategoryID', '=', $id);
+            $products = $products->where('category_id', '=', $id);
         }
 
         $byId = Input::get('byId');
@@ -37,42 +37,42 @@ class ProductController extends Controller
         $minprice = Input::get('minprice');
         $maxprice = Input::get('maxprice');
         if ($minprice != null && $maxprice != null) {
-            $souvenirs = $souvenirs->where('Price', '>=', $minprice);
-            $souvenirs = $souvenirs->where('Price', '<=', $maxprice);
+            $products = $products->where('price', '>=', $minprice);
+            $products = $products->where('price', '<=', $maxprice);
         }
 
         $search = Input::get('search');
         if ($search != null) {
-            $souvenirs = $souvenirs->where('name','LIKE','%'.$search.'%');
+            $products = $products->where('name','LIKE','%'.$search.'%');
         }
 
         switch ($sort) {
             case 'popularity_desc':
-                $souvenirs = $souvenirs->orderByDesc('Popularity');
+                $products = $products->orderByDesc('popularity');
                 break;
             case 'popularity':
-                $souvenirs = $souvenirs->orderBy('Popularity');
+                $products = $products->orderBy('popularity');
                 break;
             case 'price':
-                $souvenirs = $souvenirs->orderByDesc('Price');
+                $products = $products->orderByDesc('price');
                 break;
             case 'price_desc':
-                $souvenirs = $souvenirs->orderBy('Price');
+                $products = $products->orderBy('price');
                 break;
         }
 
-        $souvenirs = $souvenirs->get();
+        $products = $products->get();
 
         return view('product', ['categories' => Category::all(),
-            'souvenirs' => $souvenirs, 'id' => $id, 'byId' => $byId,
+            'products' => $products, 'id' => $id, 'byId' => $byId,
             'sort' => $sort, 'search' => $search,
             'minprice' => $minprice, 'maxprice' => $maxprice]);
     }
 
     public function listDetail($id) {
         if ($id != null) {
-            $souvenir = Souvenir::find($id);
-            return view('product_detail', ['souvenir' => $souvenir]);
+            $product = Product::find($id);
+            return view('product_detail', ['product' => $product]);
         }
 
         return response('', 404);
@@ -81,9 +81,9 @@ class ProductController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $souvenirs = Souvenir::all();
+        $products = Product::all();
 
-        return view('product.index', ['isAdmin' => $user->isAdmin, 'souvenirs' => $souvenirs]);
+        return view('product.index', ['isAdmin' => $user->isAdmin, 'products' => $products]);
     }
 
     public function create()
@@ -96,22 +96,22 @@ class ProductController extends Controller
         //
     }
 
-    public function show(Souvenir $souvenir)
+    public function show(Product $products)
     {
         //
     }
 
-    public function edit(Souvenir $souvenir)
+    public function edit(Product $products)
     {
         //
     }
 
-    public function update(Request $request, Souvenir $souvenir)
+    public function update(Request $request, Product $products)
     {
         //
     }
 
-    public function destroy(Souvenir $souvenir)
+    public function destroy(Product $products)
     {
         //
     }

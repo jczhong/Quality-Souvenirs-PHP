@@ -38,10 +38,10 @@
             <div class="col-2 mt-4">
                 <div class="card text-center p-2">
                     <a href="{{ url('/product/?id='.$category->id) }}">
-                        <img class="card-img-top img-responsive" src="{{ asset($category->PathOfImage) }}" alt=""/>
+                        <img class="card-img-top img-responsive" src="{{ asset($category->path_of_image) }}" alt=""/>
                     </a>
                     <div class="card-body">
-                        <h5 class="card-text">{{ $category->Name }}</h5>
+                        <h5 class="card-text">{{ $category->name }}</h5>
                     </div>
                 </div>
             </div>

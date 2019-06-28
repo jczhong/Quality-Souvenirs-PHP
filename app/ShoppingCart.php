@@ -3,31 +3,29 @@
 namespace App;
 
 use App\CartItem;
-use App\Souvenir;
-use Carbon\Carbon;
+use App\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
     public function cart_items() {
-        return $this->hasMany('App\CartItem', 'ShoppingCartID');
+        return $this->hasMany('App\CartItem');
     }
 
     public function addToCart($id, $count) {
-        $souvenir = Souvenir::find($id);
-        if ($souvenir != null) {
-            $cartItem = CartItem::where('ShoppingCartID', $this->id)
-                ->where('SouvenirID', $souvenir->id)
+        $product = Product::find($id);
+        if ($product != null) {
+            $cartItem = CartItem::where('shopping_cart_id', $this->id)
+                ->where('product_id', $product->id)
                 ->first();
             if ($cartItem == null) {
                 info('new Cart Item');
                 $cartItem = new CartItem;
-                $cartItem->ShoppingCartID = $this->id;
-                $cartItem->SouvenirID = $souvenir->id;
-                $cartItem->Count = $count;
-                $cartItem->DateCreated = Carbon::now();
+                $cartItem->shopping_cart_id = $this->id;
+                $cartItem->product_id = $product->id;
+                $cartItem->count = $count;
             } else {
-                $cartItem->Count += 1;
+                $cartItem->count += 1;
             }
             $cartItem->save();
             info("cartItem:", [$cartItem]);
@@ -38,14 +36,14 @@ class ShoppingCart extends Model
     }
 
     public function removeFromCart($id, $count) {
-        $souvenir = Souvenir::find($id);
-        if ($souvenir != null) {
-            $cartItem = CartItem::where('ShoppingCartID', $this->id)
-                ->where('SouvenirID', $souvenir->id)
+        $product = Product::find($id);
+        if ($product != null) {
+            $cartItem = CartItem::where('shopping_cart_id', $this->id)
+                ->where('product_id', $product->id)
                 ->first();
             if ($cartItem != null) {
-                $cartItem->Count -= $count;
-                if ($cartItem->Count <= 0) {
+                $cartItem->count -= $count;
+                if ($cartItem->count <= 0) {
                     $cartItem->delete();
                 } else {
                     $cartItem->save();
@@ -55,22 +53,22 @@ class ShoppingCart extends Model
     }
 
     public function cleanCart() {
-        $cartItems = CartItem::where('ShoppingCartID', $this->id)->get();
+        $cartItems = CartItem::where('shopping_cart_id', $this->id)->get();
         foreach ($cartItems as $cartItem) {
             $cartItem->delete();
         }
     }
 
     public function getCartItems() {
-        $cartItems = CartItem::where('ShoppingCartID', $this->id)->get();
+        $cartItems = CartItem::where('shopping_cart_id', $this->id)->get();
         return $cartItems;
     }
 
     public function getCount() {
         $count = 0;
-        $cartItems = CartItem::where('ShoppingCartID', $this->id)->get();
+        $cartItems = CartItem::where('shopping_cart_id', $this->id)->get();
         foreach ($cartItems as $cartItem) {
-            $count += $cartItem->Count;
+            $count += $cartItem->count;
         }
 
         return $count;

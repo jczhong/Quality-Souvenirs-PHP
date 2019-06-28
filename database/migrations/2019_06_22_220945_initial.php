@@ -20,10 +20,10 @@ class Initial extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('FullName', 30)->nullable();
-            $table->string('PhoneNumber', 15)->nullable();
-            $table->string('Address', 100)->nullable();
-            $table->boolean('Enabled')->default(true);
+            $table->string('full_name', 30)->nullable();
+            $table->string('phone', 15)->nullable();
+            $table->string('address', 100)->nullable();
+            $table->boolean('active')->default(true);
             $table->boolean('isAdmin')->default(false);
             $table->rememberToken();
             $table->timestamps();
@@ -37,74 +37,72 @@ class Initial extends Migration
 
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Name', 30);
-            $table->string('PathOfImage', 100);
+            $table->string('name', 30);
+            $table->string('path_of_image', 100);
             $table->timestamps();
         });
 
         Schema::create('suppliers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Name', 30);
-            $table->string('WorkPhoneNumber', 15);
-            $table->string('Email', 50);
-            $table->string('Address', 100);
+            $table->string('name', 30);
+            $table->string('phone', 15);
+            $table->string('email', 50);
+            $table->string('address', 100);
             $table->timestamps();
         });
 
-        Schema::create('souvenirs', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Name', 30);
-            $table->string('Description', 200);
-            $table->double('Price');
-            $table->unsignedInteger('Popularity');
-            $table->string('PathOfImage', 100)->nullable();
-            $table->unsignedInteger('CategoryID')->nullable();
-            $table->foreign('CategoryID')->references('id')->on('categories')->onDelete('set null');
-            $table->unsignedInteger('SupplierID')->nullable();
-            $table->foreign('SupplierID')->references('id')->on('suppliers')->onDelete('set null');
+            $table->string('name', 30);
+            $table->string('description', 200);
+            $table->double('price');
+            $table->unsignedInteger('popularity');
+            $table->string('path_of_image', 100)->nullable();
+            $table->unsignedInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->unsignedInteger('supplier_id')->nullable();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
             $table->timestamps();
         });
 
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('FirstName', 30);
-            $table->string('LastName', 30);
-            $table->string('Address', 100);
-            $table->string('PhoneNumber', 15);
-            $table->double('SubTotal')->nullable();
-            $table->double('GST')->nullable();
-            $table->double('GrandTotal')->nullable();
-            $table->string('OrderStatus', 10)->nullable();
-            $table->dateTime('Date')->nullable();
-            $table->unsignedInteger('UserID');
-            $table->foreign('UserID')->references('id')->on('users')->onDelete('cascade');
+            $table->string('first_name', 30);
+            $table->string('last_name', 30);
+            $table->string('address', 100);
+            $table->string('phone', 15);
+            $table->double('sub_total')->nullable();
+            $table->double('gst')->nullable();
+            $table->double('grand_total')->nullable();
+            $table->string('status', 10)->nullable();
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('order_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('Quantity');
-            $table->unsignedInteger('SouvenirID')->nullable();
-            $table->foreign('SouvenirID')->references('id')->on('souvenirs')->onDelete('set null');
-            $table->unsignedInteger('OrderID');
-            $table->foreign('OrderID')->references('id')->on('orders')->onDelete('cascade');
+            $table->unsignedInteger('quantity');
+            $table->unsignedInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('Session');
+            $table->uuid('session');
             $table->timestamps();
         });
 
         Schema::create('cart_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('Count');
-            $table->dateTime('DateCreated');
-            $table->unsignedInteger('SouvenirID');
-            $table->foreign('SouvenirID')->references('id')->on('souvenirs')->onDelete('cascade');
-            $table->unsignedInteger("ShoppingCartID");
-            $table->foreign('ShoppingCartID')->references('id')->on('shopping_carts')->onDelete('cascade');
+            $table->unsignedInteger('count');
+            $table->unsignedInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedInteger("shopping_cart_id");
+            $table->foreign('shopping_cart_id')->references('id')->on('shopping_carts')->onDelete('cascade');
             $table->timestamps();
         });
     }

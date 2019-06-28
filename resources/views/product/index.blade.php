@@ -1,7 +1,7 @@
 @extends('layouts.management')
 
 @section('management_content')
-    <h2>Souvenirs</h2>
+    <h2>Products</h2>
 
     <p>
         <a href="{{ url('/order/create') }}">Create New</a>
@@ -27,28 +27,28 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($souvenirs as $souvenir)
+        @foreach ($products as $product)
             <tr>
                 <td>
-                    {{ $souvenir->Name }}
+                    {{ $product->name }}
                 </td>
                 <td>
-                    {{ $souvenir->Price }}
+                    {{ $product->price }}
                 </td>
                 <td>
-                    {{ $souvenir->Popularity }}
+                    {{ $product->popularity }}
                 </td>
                 <td>
-                    {{ $souvenir->category->Name }}
+                    {{ $product->category->name }}
                 </td>
                 <td>
-                    {{ $souvenir->supplier->Name }}
+                    {{ $product->supplier->name }}
                 </td>
                 @if ($isAdmin == true)
                     <td>
-                        <a href="{{ url('/order/edit').'?'.http_build_query(['id' => $souvenir->id]) }}">Edit</a> |
-                        <a href="{{ url('/order/detail').'?'.http_build_query(['id' => $souvenir->id]) }}">Detail</a> |
-                        <a href="{{ url('/order/delete').'?'.http_build_query(['id' => $souvenir->id]) }}">Delete</a>
+                        <a href="{{ url('/product/edit').'?'.http_build_query(['id' => $product->id]) }}">Edit</a> |
+                        <a href="{{ url('/product/detail').'?'.http_build_query(['id' => $product->id]) }}">Detail</a> |
+                        <a href="{{ url('/product/delete').'?'.http_build_query(['id' => $product->id]) }}">Delete</a>
                     </td>
                 @endif
             </tr>

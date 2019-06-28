@@ -1,7 +1,7 @@
 @extends('layouts.management')
 
 @section('management_content')
-    <h2>Orders</h2>
+    <h2>Customers</h2>
 
     <table class="table">
         <thead>
@@ -13,7 +13,7 @@
                 {{ 'Email' }}
             </th>
             <th>
-                {{ 'Enabled' }}
+                {{ 'Active' }}
             </th>
         </tr>
         </thead>
@@ -27,7 +27,7 @@
                     {{ $user->email }}
                 </td>
                 <td>
-                    {{ $user->Enabled }}
+                    {{ $user->active == 1 ? 'true' : 'false' }}
                 </td>
                 <td>
                     <a href="{{ url('/customer/edit').'?'.http_build_query(['id' => $user->id]) }}">Edit</a>

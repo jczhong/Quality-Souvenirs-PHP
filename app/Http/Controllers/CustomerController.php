@@ -52,7 +52,7 @@ class CustomerController extends Controller
         ]);
 
         $user = User::find($id);
-        $user->Enabled = $request->input('status');
+        $user->active = $request->input('status');
         $user->save();
 
         return redirect('/customer');

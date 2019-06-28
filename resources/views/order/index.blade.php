@@ -31,22 +31,22 @@
         @foreach ($orders as $order)
             <tr>
                 <td>
-                    {{ $order->FirstName.' '.$order->LastName }}
+                    {{ $order->first_name.' '.$order->last_name }}
                 </td>
                 <td>
-                    {{ $order->Address }}
+                    {{ $order->address }}
                 </td>
                 <td>
-                    {{ $order->PhoneNumber }}
+                    {{ $order->phone }}
                 </td>
                 <td>
-                    {{ $order->GST }}
+                    {{ $order->gst }}
                 </td>
                 <td>
-                    {{ $order->GrandTotal }}
+                    {{ $order->grand_total }}
                 </td>
                 <td>
-                    {{ $order->OrderStatus }}
+                    {{ $order->status }}
                 </td>
                 @if ($isAdmin == true)
                     <td>

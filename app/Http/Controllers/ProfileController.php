@@ -18,10 +18,10 @@ class ProfileController extends Controller
 
         return view('profile.index', [
             'isAdmin' => $user->isAdmin,
-            'fullName' => $user->FullName,
+            'fullName' => $user->full_name,
             'email' => $user->email,
-            'phoneNumber' => $user->PhoneNumber,
-            'address' => $user->Address]);
+            'phoneNumber' => $user->phone,
+            'address' => $user->address]);
     }
 
     public function store(Request $request) {
@@ -32,9 +32,9 @@ class ProfileController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->FullName = $request->input('fullName');
-        $user->PhoneNumber = $request->input('phone');
-        $user->Address = $request->input('address');
+        $user->full_name = $request->input('fullName');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
         $user->save();
 
         return redirect('/profile');
