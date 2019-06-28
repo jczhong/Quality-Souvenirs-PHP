@@ -39,3 +39,7 @@ Route::post('/order/update/{id}', 'OrderController@update');
 Route::get('/customer', 'CustomerController@index');
 Route::get('/customer/edit', 'CustomerController@edit');
 Route::post('/customer/update/{id}', 'CustomerController@update');
+
+Route::get('/souvenir', 'SouvenirController@index');
+Route::get('/souvenir/edit', 'SouvenirController@edit');
+Route::post('/souvenir/update/{id}', 'SouvenirController@update');
