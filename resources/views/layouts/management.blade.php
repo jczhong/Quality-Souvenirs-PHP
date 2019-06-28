@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.root')
 
 @section('title', 'Profile')
 
@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ url('/customer') }}">Customers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/souvenir') }}">Souvenirs</a>
+                <a class="nav-link" href="{{ url('/product/manage') }}">Souvenirs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Suppliers</a>
@@ -24,12 +24,12 @@
             </li>
             @endif
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('profile') }}">Profile</a>
+                <a class="nav-link" href="{{ url('/profile') }}">Profile</a>
             </li>
         </ul>
     </div>
     <div class="col-10">
-        @yield('profile_content')
+        @yield('management_content')
     </div>
 </div>
 @endsection

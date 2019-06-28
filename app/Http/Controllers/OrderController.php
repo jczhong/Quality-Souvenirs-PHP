@@ -18,11 +18,6 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = Auth::user();
@@ -34,14 +29,9 @@ class OrderController extends Controller
         } else {
             $orders = Order::where('UserID', $user->id)->get();
         }
-        return view('profile_orders', ['orders' => $orders, 'isAdmin' => $isAdmin]);
+        return view('order.index', ['orders' => $orders, 'isAdmin' => $isAdmin]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = Auth::user();
@@ -53,15 +43,9 @@ class OrderController extends Controller
             $phoneNumber = $user->PhoneNumber;
         }
 
-        return view('order_create', ['address' => $address, 'phoneNumber' => $phoneNumber]);
+        return view('order.create', ['address' => $address, 'phoneNumber' => $phoneNumber]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -115,39 +99,20 @@ class OrderController extends Controller
         return response('session expore', 404);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function show(Order $order)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request)
     {
         $user = Auth::user();
         $id = $request->input('id');
         $order = Order::find($id);
 
-        return view('profile_orders_edit', ['isAdmin' => $user->isAdmin, 'order' => $order]);
+        return view('order.edit', ['isAdmin' => $user->isAdmin, 'order' => $order]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -161,12 +126,6 @@ class OrderController extends Controller
         return redirect('/order');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Order $order)
     {
         //

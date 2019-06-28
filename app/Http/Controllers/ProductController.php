@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Souvenir;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -14,7 +15,7 @@ class ProductController extends Controller
     {
     }
 
-    public function index(Request $request) {
+    public function list(Request $request) {
         $souvenirs = DB::table("souvenirs")
             ->select(DB::raw('*'));
 
@@ -68,13 +69,50 @@ class ProductController extends Controller
             'minprice' => $minprice, 'maxprice' => $maxprice]);
     }
 
-    public function detail(Request $request) {
-        $id = $request->input('id');
+    public function listDetail($id) {
         if ($id != null) {
             $souvenir = Souvenir::find($id);
             return view('product_detail', ['souvenir' => $souvenir]);
         }
 
         return response('', 404);
+    }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $souvenirs = Souvenir::all();
+
+        return view('product.index', ['isAdmin' => $user->isAdmin, 'souvenirs' => $souvenirs]);
+    }
+
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show(Souvenir $souvenir)
+    {
+        //
+    }
+
+    public function edit(Souvenir $souvenir)
+    {
+        //
+    }
+
+    public function update(Request $request, Souvenir $souvenir)
+    {
+        //
+    }
+
+    public function destroy(Souvenir $souvenir)
+    {
+        //
     }
 }

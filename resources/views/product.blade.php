@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.root')
 
 @section('title', 'Product')
 
@@ -83,7 +83,7 @@
         @foreach ($souvenirs as $souvenir)
             <div class="col-2 mb-4">
                 <div>
-                    <a href="{{ url('/product/detail').'?'.http_build_query(['id' => $souvenir->id]) }}">
+                    <a href="{{ url('/product/detail').'/'.$souvenir->id }}">
                         <img width="150" height="200" src="{{ $souvenir->PathOfImage }}">
                     </a>
                 </div>

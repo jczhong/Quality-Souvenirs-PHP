@@ -1,6 +1,6 @@
-@extends('layouts.profile')
+@extends('layouts.management')
 
-@section('profile_content')
+@section('management_content')
     <h2>Souvenirs</h2>
 
     <p>

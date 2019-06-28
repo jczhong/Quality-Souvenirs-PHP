@@ -16,8 +16,14 @@ Route::view('/about', 'about');
 Route::view('/contact', 'contact');
 
 
-Route::get('/product', 'ProductController@index');
-Route::get('/product/detail', 'ProductController@detail');
+Route::get('/product', 'ProductController@list');
+Route::get('/product/detail/{id}', 'ProductController@listDetail');
+
+Route::get('/product/manage', 'ProductController@index');
+Route::get('/product/manage/edit', 'ProductController@edit');
+Route::post('/product/manage/update/{id}', 'ProductController@update');
+
+
 Route::post('/ShoppingCart/AddPOST', 'ShoppingCartController@AddPOST');
 Route::get('/ShoppingCart/show', 'ShoppingCartController@show');
 Route::get('/ShoppingCart/AddGet', 'ShoppingCartController@AddGet');
@@ -26,7 +32,7 @@ Route::get('/ShoppingCart/ClearCart', 'ShoppingCartController@ClearCart');
 Route::get('/ShoppingCart/GetCount', 'ShoppingCartController@GetCount');
 
 Auth::routes();
-Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/profile', 'ProfileController@index');
 Route::post('/profile/store', 'ProfileController@store');
 
 Route::get('/order', 'OrderController@index');
@@ -35,11 +41,6 @@ Route::post('/order/store', 'OrderController@store');
 Route::get('/order/edit', 'OrderController@edit');
 Route::post('/order/update/{id}', 'OrderController@update');
 
-
 Route::get('/customer', 'CustomerController@index');
 Route::get('/customer/edit', 'CustomerController@edit');
 Route::post('/customer/update/{id}', 'CustomerController@update');
-
-Route::get('/souvenir', 'SouvenirController@index');
-Route::get('/souvenir/edit', 'SouvenirController@edit');
-Route::post('/souvenir/update/{id}', 'SouvenirController@update');

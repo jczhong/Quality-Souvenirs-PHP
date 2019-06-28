@@ -13,6 +13,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('index', ['categories' => Category::all()]);
+        return view('home', ['categories' => Category::all()]);
     }
 }
