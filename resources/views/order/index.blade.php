@@ -48,7 +48,7 @@
                 <td>
                     {{ $order->status }}
                 </td>
-                @if ($isAdmin == true)
+                @if (\Illuminate\Support\Facades\Gate::allows('management'))
                     <td>
                         <a href="{{ url('/order/edit').'?'.http_build_query(['id' => $order->id]) }}">Edit</a>
                     </td>

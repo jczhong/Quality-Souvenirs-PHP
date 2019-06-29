@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -21,14 +22,13 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $orders = null;
-        $isAdmin = false;
-        if ($user->isAdmin()) {
+
+        if (Gate::allows('management')) {
             $orders = Order::all();
-            $isAdmin = true;
         } else {
             $orders = Order::where('user_id', $user->id)->get();
         }
-        return view('order.index', ['orders' => $orders, 'isAdmin' => $isAdmin]);
+        return view('order.index', ['orders' => $orders]);
     }
 
     public function create()
@@ -106,11 +106,10 @@ class OrderController extends Controller
 
     public function edit(Request $request)
     {
-        $user = Auth::user();
         $id = $request->input('id');
         $order = Order::find($id);
 
-        return view('order.edit', ['isAdmin' => $user->isAdmin, 'order' => $order]);
+        return view('order.edit', ['order' => $order]);
     }
 
     public function update(Request $request, $id)

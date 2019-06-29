@@ -80,10 +80,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
         $products = Product::all();
 
-        return view('product.index', ['isAdmin' => $user->isAdmin, 'products' => $products]);
+        return view('product.index', ['products' => $products]);
     }
 
     public function create()

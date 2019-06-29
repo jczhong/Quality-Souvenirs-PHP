@@ -44,7 +44,7 @@
                 <td>
                     {{ $product->supplier->name }}
                 </td>
-                @if ($isAdmin == true)
+                @if (\Illuminate\Support\Facades\Gate::allows('management'))
                     <td>
                         <a href="{{ url('/product/edit').'?'.http_build_query(['id' => $product->id]) }}">Edit</a> |
                         <a href="{{ url('/product/detail').'?'.http_build_query(['id' => $product->id]) }}">Detail</a> |

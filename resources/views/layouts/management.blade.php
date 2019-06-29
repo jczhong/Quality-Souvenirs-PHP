@@ -9,19 +9,19 @@
             <li class="nav-item">
                 <a class="nav-link active" href="{{ url('/order') }}">Orders</a>
             </li>
-            @if ($isAdmin == true)
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/customer') }}">Customers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/product/manage') }}">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Suppliers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Categories</a>
-            </li>
+            @if (\Illuminate\Support\Facades\Gate::allows('management'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/customer') }}">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/product/manage') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Suppliers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Categories</a>
+                </li>
             @endif
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/profile') }}">Profile</a>

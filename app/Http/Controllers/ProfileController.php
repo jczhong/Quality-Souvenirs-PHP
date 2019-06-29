@@ -17,7 +17,6 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         return view('profile.index', [
-            'isAdmin' => $user->isAdmin,
             'fullName' => $user->full_name,
             'email' => $user->email,
             'phoneNumber' => $user->phone,
