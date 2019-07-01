@@ -34,13 +34,8 @@ class OrderController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $address = null;
-        $phoneNumber = null;
-
-        if ($user != null) {
-            $address = $user->address;
-            $phone = $user->phone;
-        }
+        $address = $user->address;
+        $phone = $user->phone;
 
         return view('order.create', ['address' => $address, 'phone' => $phone]);
     }
@@ -48,10 +43,10 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'firstName' => 'bail|required|string|max:30',
+            'lastName' => 'bail|required|string|max:30',
+            'address' => 'bail|required|string',
+            'phone' => 'required|numeric',
         ]);
 
         $session = session('cart');
