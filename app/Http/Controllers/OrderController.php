@@ -85,8 +85,8 @@ class OrderController extends Controller
             $order->grand_total = $grandTotal;
             $order->status = "waiting";
             $order->save();
-
-            //FIXME need to remove cart items
+            
+            $cart->delete();
 
             return redirect('/order');
         }
