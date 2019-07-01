@@ -21,7 +21,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach ($categories as $category)
                                     <a class="dropdown-item"
-                                       href="{{ url('/product').'?'.http_build_query(['id' => $category->id, 'byId' => 'true', 'sort' => $sort, 'search' => $search, 'minprice' => $minprice, 'maxprice' => $maxprice]) }}">{{ $category->Name }}</a>
+                                       href="{{ url('/product').'?'.http_build_query(['id' => $category->id, 'byId' => 'true', 'sort' => $sort, 'search' => $search, 'minprice' => $minprice, 'maxprice' => $maxprice]) }}">{{ $category->name }}</a>
                                 @endforeach
                             </div>
                         </li>
