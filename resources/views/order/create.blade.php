@@ -10,7 +10,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="firstName">{{ 'FirstName' }}</label>
-                    <input id="firstName" name="firstName" class="form-control @error('firstName') is-invalid @enderror" type="text" required/>
+                    <input id="firstName" name="firstName" class="form-control @error('firstName') is-invalid @enderror" type="text"/>
                     @error('firstName')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lastName" class="control-label">{{ 'LastName' }}</label>
-                    <input id="lastName" name="lastName" class="form-control @error('lastName') is-invalid @enderror" type="text" required/>
+                    <input id="lastName" name="lastName" class="form-control @error('lastName') is-invalid @enderror" type="text"/>
                     @error('lastName')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label for="address" class="control-label">{{ 'Address' }}</label>
-                    <input id="address" name="address" class="form-control @error('address') is-invalid @enderror" type="text" value="{{ $address }}" required/>
+                    <input id="address" name="address" class="form-control @error('address') is-invalid @enderror" type="text" value="{{ $address }}"/>
                     @error('address')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber" class="control-label">{{ 'Phone' }}</label>
-                    <input id="phoneNumber" name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ $phone }}" required/>
+                    <input id="phoneNumber" name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ $phone }}"/>
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
