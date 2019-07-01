@@ -7,8 +7,8 @@
         <div class="form-group">
             <label for="status">{{ 'User Status' }}</label>
             <select name="status" class="custom-select">
-                <option value="1">{{ 'Enable' }}</option>
-                <option value="0">{{ 'Disable' }}</option>
+                <option value="1" {{ ($user->active == 1) ? 'selected' : '' }}>{{ 'Active' }}</option>
+                <option value="0" {{ ($user->active == 0) ? 'selected' : '' }}>{{ 'Inactive' }}</option>
             </select>
         </div>
         <div class="form-group">

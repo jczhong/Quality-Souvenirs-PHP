@@ -42,7 +42,7 @@ class CustomerController extends Controller
         $id = $request->input('id');
         $user = User::where('id', $id)->first();
 
-        return view('customer.edit', ['isAdmin' => $currentUser->isAdmin, 'user' => $user]);
+        return view('customer.edit', ['user' => $user]);
     }
 
     public function update(Request $request, $id)
