@@ -85,7 +85,7 @@ class OrderController extends Controller
             $order->grand_total = $grandTotal;
             $order->status = "waiting";
             $order->save();
-            
+
             $cart->delete();
 
             return redirect('/order');
@@ -110,7 +110,7 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required',
+            'status' => 'required|string',
         ]);
 
         $order = Order::find($id);
