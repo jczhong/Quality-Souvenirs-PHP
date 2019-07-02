@@ -3,9 +3,9 @@
 @section('title', 'Contact')
 
 @section('content')
-    <div class="ContactRow">
-        <div class="ContactMapWrapper">
-            <div class="ContactMap" id="map"></div>
+    <div class="row mt-4">
+        <div class="col-8">
+            <div class="w-100" style="height:400px;" id="map"></div>
         </div>
 
         <script>
@@ -15,7 +15,7 @@
                     center: { lat: -36.87967209686738, lng: 174.7068214416504 },
                     zoom: 15
                 });
-                // Add marker
+
                 var marker = new google.maps.Marker({
                     position: { lat: -36.87967209686738, lng: 174.7068214416504 },
                     map: map
@@ -25,7 +25,7 @@
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFyDYFSffqTsmYyt1Gor99wcjdSCHMQgI&callback=initMap">
         </script>
-        <div class="ContactInfo">
+        <div class="col-4">
             <address>
                 <strong>Address:</strong>
                 139 Carrington Rd<br />

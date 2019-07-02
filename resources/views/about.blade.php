@@ -3,8 +3,8 @@
 @section('title', 'About')
 
 @section('content')
-    <div class="AboutRow">
-        <div class="AboutIntroduction">
+    <div class="row mt-4">
+        <div class="col-6">
             <h1><strong>Who we are</strong></h1>
             <div>
                 We are the best in this field. We have distinctive products and enthusiastic service.As always to provide you with high-grade, luxury services,
@@ -12,8 +12,8 @@
                 The website likes our motivation, and why we do what we do.
             </div>
         </div>
-        <div class="AboutImageWrapper">
-            <img class="AboutImage" src="{{ asset('storage/images/about.jpg') }}">
+        <div class="col-6">
+            <img class="w-100" src="{{ asset('storage/images/about.jpg') }}">
         </div>
     </div>
 @endsection
