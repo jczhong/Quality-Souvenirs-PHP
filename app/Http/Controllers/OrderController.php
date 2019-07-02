@@ -94,9 +94,12 @@ class OrderController extends Controller
         return response('session expire', 404);
     }
 
-    public function show(Order $order)
+    public function show(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $order = Order::find($id);
+
+        return view('order.detail', ['order' => $order]);
     }
 
     public function edit(Request $request)

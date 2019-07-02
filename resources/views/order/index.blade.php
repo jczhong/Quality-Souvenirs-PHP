@@ -24,7 +24,9 @@
             <th>
                 {{ 'Order Status' }}
             </th>
-            <th></th>
+            <th>
+                {{ 'Operations' }}
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -48,11 +50,12 @@
                 <td>
                     {{ $order->status }}
                 </td>
-                @if (\Illuminate\Support\Facades\Gate::allows('management'))
-                    <td>
-                        <a href="{{ url('/order/edit').'?'.http_build_query(['id' => $order->id]) }}">Edit</a>
-                    </td>
-                @endif
+                <td>
+                    <a href="{{ url('/order/show').'?'.http_build_query(['id' => $order->id]) }}">Detail</a>
+                    @if (\Illuminate\Support\Facades\Gate::allows('management'))
+                        | <a href="{{ url('/order/edit').'?'.http_build_query(['id' => $order->id]) }}">Edit</a>
+                    @endif
+                </td>
             </tr>
         @endforeach
         </tbody>

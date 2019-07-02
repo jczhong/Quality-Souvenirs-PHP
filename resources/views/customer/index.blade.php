@@ -15,6 +15,9 @@
             <th>
                 {{ 'Active' }}
             </th>
+            <th>
+                {{ 'Operations' }}
+            </th>
         </tr>
         </thead>
         <tbody>

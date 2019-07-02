@@ -18,7 +18,7 @@ class CustomerController extends Controller
         $user = Auth::user();
         $users = User::where('id', '!=', $user->id)->get();
 
-        return view('customer.index', ['isAdmin' => $user->isAdmin, 'users' => $users]);
+        return view('customer.index', ['users' => $users]);
     }
 
     public function create()
@@ -38,7 +38,6 @@ class CustomerController extends Controller
 
     public function edit(Request $request)
     {
-        $currentUser = Auth::user();
         $id = $request->input('id');
         $user = User::where('id', $id)->first();
 

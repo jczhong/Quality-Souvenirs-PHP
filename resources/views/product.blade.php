@@ -84,7 +84,7 @@
             <div class="col-2 mb-4">
                 <div>
                     <a href="{{ url('/product/detail').'/'.$product->id }}">
-                        <img width="150" height="200" src="{{ $product->path_of_image }}">
+                        <img width="150" height="200" src="{{ empty($product->path_of_image) ? '' : asset('storage/'.$product->path_of_image) }}">
                     </a>
                 </div>
                 <div class="text-center mt-1">

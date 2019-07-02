@@ -15,4 +15,7 @@
             <input type="submit" value="Submit" class="btn btn-success"/>
         </div>
     </form>
+    <div>
+        <a href="{{ url('/order') }}">Back to List</a>
+    </div>
 @endsection

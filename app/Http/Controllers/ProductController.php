@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -87,31 +88,91 @@ class ProductController extends Controller
 
     public function create()
     {
-        //
+        return view('product.create', ['categories' => Category::all(), 'suppliers' => Supplier::all()]);
     }
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'bail|required|string|max:30',
+            'price' => 'bail|required|string|max:200',
+            'popularity' => 'required|numeric',
+            'image' => 'required',
+            'category' => 'bail|required|numeric',
+            'supplier' => 'bail|required|numeric',
+        ]);
+
+        $product = new Product();
+
+        $path = Storage::disk('public')->put('images/products', $request->file('image'));
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->popularity = $request->input('popularity');
+        $product->path_of_image = $path;
+        $product->category_id = $request->input('category');
+        $product->supplier_id = $request->input('supplier');
+        $product->save();
+
+        return redirect('/product/manage');
     }
 
-    public function show(Product $products)
+    public function show(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $product = Product::find($id);
+
+        return view('product.detail', ['product' => $product]);
     }
 
-    public function edit(Product $products)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $product = Product::find($id);
+
+        return view('product.edit', ['product' => $product, 'categories' => Category::all(), 'suppliers' => Supplier::all()]);
     }
 
-    public function update(Request $request, Product $products)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'bail|required|string|max:30',
+            'price' => 'bail|required|string|max:200',
+            'popularity' => 'required|numeric',
+            'image' => 'required',
+            'category' => 'bail|required|numeric',
+            'supplier' => 'bail|required|numeric',
+        ]);
+
+        $product = Product::find($id);
+
+        if (!empty($product->path_of_image)) {
+            Storage::disk('public')->delete($product->path_of_image);
+        }
+        $path = Storage::disk('public')->put('images/products', $request->file('image'));
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->popularity = $request->input('popularity');
+        $product->path_of_image = $path;
+        $product->category_id = $request->input('category');
+        $product->supplier_id = $request->input('supplier');
+        $product->save();
+
+        return redirect('/product/manage');
     }
 
-    public function destroy(Product $products)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $product = Product::find($id);
+
+        $product->delete();
+
+        return redirect('/product/manage');
     }
 }

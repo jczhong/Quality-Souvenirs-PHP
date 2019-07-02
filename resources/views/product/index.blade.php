@@ -4,7 +4,7 @@
     <h2>Products</h2>
 
     <p>
-        <a href="{{ url('/order/create') }}">Create New</a>
+        <a href="{{ url('/product/manage/create') }}">Create New</a>
     </p>
     <table class="table">
         <thead>
@@ -23,6 +23,9 @@
             </th>
             <th>
                 {{ 'Supplier' }}
+            </th>
+            <th>
+                {{ 'Operations' }}
             </th>
         </tr>
         </thead>
@@ -46,9 +49,8 @@
                 </td>
                 @if (\Illuminate\Support\Facades\Gate::allows('management'))
                     <td>
-                        <a href="{{ url('/product/edit').'?'.http_build_query(['id' => $product->id]) }}">Edit</a> |
-                        <a href="{{ url('/product/detail').'?'.http_build_query(['id' => $product->id]) }}">Detail</a> |
-                        <a href="{{ url('/product/delete').'?'.http_build_query(['id' => $product->id]) }}">Delete</a>
+                        <a href="{{ url('/product/manage/edit').'?'.http_build_query(['id' => $product->id]) }}">Edit</a> |
+                        <a href="{{ url('/product/manage/show').'?'.http_build_query(['id' => $product->id]) }}">Detail</a>
                     </td>
                 @endif
             </tr>
