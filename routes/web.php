@@ -57,11 +57,11 @@ Route::middleware('auth', 'admin')->group(function () {
 
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/supplier', 'SupplierController@index');
-    Route::get('/supplier/show', 'SupplierController@show');
-    Route::get('/supplier/edit', 'SupplierController@get');
+    Route::get('/supplier/edit', 'SupplierController@edit');
     Route::post('/supplier/update/{id}', 'SupplierController@update');
     Route::get('/supplier/create', 'SupplierController@create');
-    Route::get('/supplier/store', 'SupplierController@store');
+    Route::post('/supplier/store', 'SupplierController@store');
+    Route::get('/supplier/delete', 'SupplierController@destroy');
 });
 
 Route::middleware('auth', 'admin')->group(function () {

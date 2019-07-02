@@ -25,8 +25,8 @@
         <div class="form-group">
             <label for="price">{{ 'Price' }}</label>
             <input id="price" name="price" class="form-control @error('price') is-invalid @enderror" type="number" value="{{ $product->price }}" step="0.01"/>
-            @error('description')
-            <span class="invalid-feedback" role="alert">
+            @error('price')
+                <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
@@ -70,7 +70,7 @@
                 @endforeach
             </select>
             @error('supplier')
-            <span class="invalid-feedback" role="alert">
+                <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror

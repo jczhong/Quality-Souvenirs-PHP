@@ -1,7 +1,7 @@
 @extends('layouts.management')
 
 @section('management_content')
-    <h2>Product</h2>
+    <h2>Category</h2>
     <form action="{{ url('/category/update/'.$category->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
