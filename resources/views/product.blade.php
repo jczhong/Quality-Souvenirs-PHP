@@ -45,7 +45,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item mr-sm-2">
                             <div class="nav-link">
-                                Showing 1 - 3 of 6 products
+                                {{ 'Showing '.(($products->currentPage() - 1) * $products->perPage() + 1).' - '.($products->currentPage() * $products->perPage()).' of '.$products->total().' products' }}
                             </div>
                         </li>
                         <li class="nav-item sort-selector" value="{{ $sort }}">
@@ -66,7 +66,7 @@
         <div class="col">
             @if ($byId == 'true')
                 <div>
-                    <span>{{ $categories->where('id', $id)->first()->Name }}</span>
+                    <span>{{ $categories->where('id', $id)->first()->name }}</span>
                     <a href="{{ url('/product').'?'.http_build_query(['id' => null, 'byId' => 'false', 'sort' => $sort, 'search' => $search, 'minprice' => $minprice, 'maxprice' => $maxprice]) }}">X</a>
                 </div>
             @endif
@@ -101,11 +101,7 @@
     </div>
 
     <div class="row mt-2 justify-content-center">
-        <div class="col-1">
-            <a class="btn btn-light @prevDisabled PageIndexItem" href="#">Prev</a>
-        </div>
-        <div class="col-1">
-            <a class="btn btn-light @nextDisabled PageIndexItem" href="#">Next</a>
-        </div>
+        {{ $products->appends(['id' => $id, 'byId' => $byId, 'sort' => $sort, 'search' => $search,
+            'minprice' => $minprice, 'maxprice' => $maxprice])->links() }}
     </div>
 @endsection

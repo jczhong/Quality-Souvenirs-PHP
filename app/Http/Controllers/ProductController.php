@@ -62,7 +62,7 @@ class ProductController extends Controller
                 break;
         }
 
-        $products = $products->get();
+        $products = $products->paginate(12);
 
         return view('product', ['categories' => Category::all(),
             'products' => $products, 'id' => $id, 'byId' => $byId,
