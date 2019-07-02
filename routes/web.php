@@ -66,9 +66,9 @@ Route::middleware('auth', 'admin')->group(function () {
 
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/category', 'CategoryController@index');
-    Route::get('/category/show', 'CategoryController@show');
-    Route::get('/category/edit', 'CategoryController@get');
+    Route::get('/category/edit', 'CategoryController@edit');
     Route::post('/category/update/{id}', 'CategoryController@update');
     Route::get('/category/create', 'CategoryController@create');
-    Route::get('/category/store', 'CategoryController@store');
+    Route::post('/category/store', 'CategoryController@store');
+    Route::get('/category/delete', 'CategoryController@destroy');
 });

@@ -47,12 +47,10 @@
                 <td>
                     {{ $product->supplier->name }}
                 </td>
-                @if (\Illuminate\Support\Facades\Gate::allows('management'))
-                    <td>
-                        <a href="{{ url('/product/manage/edit').'?'.http_build_query(['id' => $product->id]) }}">Edit</a> |
-                        <a href="{{ url('/product/manage/show').'?'.http_build_query(['id' => $product->id]) }}">Detail</a>
-                    </td>
-                @endif
+                <td>
+                    <a href="{{ url('/product/manage/edit').'?'.http_build_query(['id' => $product->id]) }}">Edit</a> |
+                    <a href="{{ url('/product/manage/show').'?'.http_build_query(['id' => $product->id]) }}">Detail</a>
+                </td>
             </tr>
         @endforeach
         </tbody>

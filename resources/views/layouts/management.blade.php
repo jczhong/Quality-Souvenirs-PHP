@@ -17,10 +17,10 @@
                     <a class="nav-link" href="{{ url('/product/manage') }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Suppliers</a>
+                    <a class="nav-link" href="{{ url('/supplier') }}">Suppliers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
+                    <a class="nav-link" href="{{ url('/category') }}">Categories</a>
                 </li>
             @endif
             <li class="nav-item">

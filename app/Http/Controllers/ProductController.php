@@ -94,9 +94,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'description' => 'bail|required|string|max:30',
-            'price' => 'bail|required|string|max:200',
+            'name' => 'required|string|max:30',
+            'description' => 'bail|required|string|max:100',
+            'price' => 'bail|required|numeric',
             'popularity' => 'required|numeric',
             'image' => 'required',
             'category' => 'bail|required|numeric',
@@ -138,9 +138,9 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string',
-            'description' => 'bail|required|string|max:30',
-            'price' => 'bail|required|string|max:200',
+            'name' => 'required|string|max:30',
+            'description' => 'bail|required|string|max:100',
+            'price' => 'bail|required|numeric',
             'popularity' => 'required|numeric',
             'image' => 'required',
             'category' => 'bail|required|numeric',
@@ -171,6 +171,9 @@ class ProductController extends Controller
         $id = $request->input('id');
         $product = Product::find($id);
 
+        if (!empty($product->path_of_image)) {
+            Storage::disk('public')->delete($product->path_of_image);
+        }
         $product->delete();
 
         return redirect('/product/manage');
