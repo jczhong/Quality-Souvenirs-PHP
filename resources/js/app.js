@@ -93,7 +93,7 @@ $(document).ready(function () {
     }
 
     (function() {
-        $.get("/qualitysouvenirs/public/cart/count", function (data, status) {
+        $.get("/cart/count", function (data, status) {
             if (status == "success") {
                 setCartCount(data);
             }
@@ -111,7 +111,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: '/qualitysouvenirs/public/cart/add',
+            url: '/cart/add',
             type: 'post',
             data: {
                 id: id,
