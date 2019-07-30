@@ -114,14 +114,14 @@ class Initial extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cart_items');
+        Schema::dropIfExists('shopping_carts');
         Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('order_details');
+        Schema::dropIfExists('orders');
+        Schema::dropIfExists('products');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('suppliers');
-        Schema::dropIfExists('souvenirs');
-        Schema::dropIfExists('orders');
-        Schema::dropIfExists('order_details');
-        Schema::dropIfExists('shopping_carts');
-        Schema::dropIfExists('cart_items');
+        Schema::dropIfExists('users');
     }
 }
