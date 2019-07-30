@@ -26,3 +26,6 @@ This is a shopping website project which is an assignment of course ISCG7420 Web
 - Lavarel
 - MySQL
 - jQuery + Bootstrap 4
+
+# Demo
+[Quality-Souvenirs](http://storephp.z1c2.com/)
